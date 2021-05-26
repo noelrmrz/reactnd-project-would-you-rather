@@ -1,0 +1,159 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 16px;
+}
+
+.header {
+  text-align: center;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.dashboard-list {
+  margin: 80px;
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.question {
+  max-width: 500px;
+  background: lavenderblush;
+  border-bottom-left-radius: 1%;
+  border-bottom-right-radius: 1%;
+  margin: 16px;
+}
+
+.question-header {
+  background: gainsboro;
+  border-radius: 1%;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-details > * {
+  margin: 0px
+}
+
+.question-details p {
+  font-size: small;
+}
+
+.question-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-body p {
+  margin: 0px;
+}
+
+div.question-body p:nth-of-type(even) {
+  font-size: small;
+  margin-bottom: 8px;
+}
+
+.question-form fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.question-form > * {
+  display:flex
+}
+
+.option {
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.question-form fieldset input[type=submit] {
+  padding: 8px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.question-form fieldset input[type=text] {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+label {
+  cursor: pointer;
+}
+
+table {
+  margin-left: auto;
+  margin-right:auto;
+  text-align: center;
+  border-collapse: collapse;
+  background: gainsboro;
+}
+
+table thead tr th {
+  padding: 8px;
+  background-color: azure;
+}
+
+table tr:nth-of-type(even) {
+  background-color: azure;
+}
