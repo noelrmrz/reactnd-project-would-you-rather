@@ -43,7 +43,8 @@
   list-style-type: none;
   align-items: center;
   flex-wrap: wrap;
-  margin: 16px;
+  padding: 16px;
+  background-color: gainsboro;
 }
 
 .header {
@@ -57,18 +58,40 @@
   border-radius: 50%;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.filter-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin: 16px;
+}
+
+.question-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
 .dashboard-list {
-  margin: 80px;
   list-style-type: none;
   padding-left: 0px;
 }
 
 .question {
-  max-width: 500px;
+  min-width: 500px;
   background: lavenderblush;
   border-bottom-left-radius: 1%;
   border-bottom-right-radius: 1%;
   margin: 16px;
+  display: inline-block;
 }
 
 .question-header {

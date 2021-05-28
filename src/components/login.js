@@ -38,7 +38,7 @@ class Login extends Component {
                     <select value={this.state.authedUser} onChange={this.handleChange}>
                         <option value="" selected disabled hidden>Select user</option>
                         {Object.keys(this.props.users).map((user, i) => (
-                            <option value={user}>@{user}</option>
+                            <option key={user} value={user}>@{user}</option>
                         ))}
                     </select>
 

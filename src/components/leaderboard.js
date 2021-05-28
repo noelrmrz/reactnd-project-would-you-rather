@@ -6,7 +6,7 @@ class Leaderboard extends Component {
     render() {
         return (
             <div className="leaderboard">
-                <h2 className='header'>People who have nothing else to do but ask and answer odd questions</h2>
+                <h2 className='header'>Some people have too much free time</h2>
                 <table>
                     <thead>
                         <tr>
