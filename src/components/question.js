@@ -70,34 +70,34 @@ class Question extends Component {
                         </form>
                     </div>
                     : <div className="question-body">
-                    <h2>Would you rather...</h2>
-                    <div className='row'>
-                        <div className='question-result-column-image'>
-                            {getUserVote(this.props.authedUser, question) === 1 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                        <h2>Would you rather...</h2>
+                        <div className='row'>
+                            <div className='question-result-column-image'>
+                                {getUserVote(this.props.authedUser, question) === 1 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                            </div>
+                            <div className='question-result-column-data'>
+                                <p>{optionOne.text}</p>
+                                <meter id={optionOne}
+                                    min="0" max={totalVotes}
+                                    value={optionOne.votes.length}>
+                                </meter>
+                                <p>{optionOne.votes.length} of {totalVotes} votes</p>
+                            </div>
                         </div>
-                        <div className='question-result-column-data'>
-                            <p>{optionOne.text}</p>
-                            <meter id={optionOne}
-                                min="0" max={totalVotes}
-                                value={optionOne.votes.length}>
-                            </meter>
-                            <p>{optionOne.votes.length} of {totalVotes} votes</p>
+                        <div className='row'>
+                            <div className='question-result-column-image'>
+                                {getUserVote(this.props.authedUser, question) === 2 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                            </div>
+                            <div className='question-result-column-data'>
+                                <p>{optionTwo.text}</p>
+                                <meter id={optionTwo}
+                                    min="0" max={totalVotes}
+                                    value={optionTwo.votes.length}>
+                                </meter>
+                                <p>{optionTwo.votes.length} of {totalVotes} votes</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className='row'>
-                        <div className='question-result-column-image'>
-                            {getUserVote(this.props.authedUser, question) === 2 ? <img src={logo} alt="You voted for this" /> : <img></img>}
-                        </div>
-                        <div className='question-result-column-data'>
-                            <p>{optionTwo.text}</p>
-                            <meter id={optionTwo}
-                                min="0" max={totalVotes}
-                                value={optionTwo.votes.length}>
-                            </meter>
-                            <p>{optionTwo.votes.length} of {totalVotes} votes</p>
-                        </div>
-                    </div>
-                </div>}
+                    </div>}
             </div>
         )
     }

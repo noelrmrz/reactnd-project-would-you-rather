@@ -1,6 +1,4 @@
-export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const ADD_USER_QUESTION = 'ADD_USER_QUESTION'
-export const USER_ANSWER_QUESTION = 'USER_ANSWER_QUESTION'
+import { ADD_USER_QUESTION, RECEIVE_USERS, USER_ANSWER_QUESTION } from './types'
 
 export function receiveUsers (users) {
     return {

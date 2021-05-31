@@ -2,47 +2,21 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question, { checkForUserVote } from './question'
 import { withRouter } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
 
 class Dashboard extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            unanswered: false,
-            answered: false
-        }
-        this.handleInputChange = this.handleInputChange.bind(this)
         this.loadQuestionDetails = this.loadQuestionDetails.bind(this)
     }
 
-    filterList(list) {
-        if (this.getFilter() === null) {
-            return list
+    filterList(list, unansweredQuestions) {
+        if (unansweredQuestions) {
+            return list.filter(question => checkForUserVote(this.props.authedUser, question) === unansweredQuestions)
         }
-        else {
-            return list.filter(question => checkForUserVote(this.props.authedUser, question) === this.getFilter())
-        }
-    }
-
-    getFilter() {
-        if (this.state.answered === true && this.state.unanswered === false) {
-            return true;
-        }
-        else if (this.state.unanswered === true && this.state.answered === false) {
-            return false;
-        }
-        else {
-            return null;
-        }
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
+        else
+            return list.filter(question => checkForUserVote(this.props.authedUser, question) === unansweredQuestions)
     }
 
     loadQuestionDetails(e, questionId) {
@@ -54,28 +28,36 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1 className='header'>Ask Freely</h1>
-                <div className='row'>
-                    <div className='filter-column'>
-                        <h4>Filters</h4>
-                        <form>
-                            <label>
-                                Unanswered:
-                                    <input
-                                    name="unanswered"
-                                    type="checkbox"
-                                    checked={this.state.unanswered}
-                                    onChange={this.handleInputChange} />
-                            </label>
-                            <label>
-                                answered:
-                                    <input
-                                    name="answered"
-                                    type="checkbox"
-                                    checked={this.state.answered}
-                                    onChange={this.handleInputChange} />
-                            </label>
-                        </form>
-                    </div>
+                <Tabs>
+                    <TabList>
+                        <Tab>Unanswered questions</Tab>
+                        <Tab>Answered questions</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        <div className='question-column'>
+                            <ul className='dashboard-list'>
+                                {this.filterList(this.props.allQuestions, false).map((question) => (
+                                    <li key={question.id}>
+                                        <Question id={question.id} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </TabPanel>
+                    <TabPanel>
+                        <div className='question-column'>
+                            <ul className='dashboard-list'>
+                                {this.filterList(this.props.allQuestions, true).map((question) => (
+                                    <li key={question.id}>
+                                        <Question id={question.id} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </TabPanel>
+                </Tabs>
+                {/*                 <div className='row'>
                     <div className='question-column'>
                         <ul className='dashboard-list'>
                             {this.filterList(this.props.allQuestions).map((question) => (
@@ -85,7 +67,7 @@ class Dashboard extends Component {
                             ))}
                         </ul>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }

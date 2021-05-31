@@ -1,9 +1,10 @@
 import { React, Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddQuestion } from '../actions/shared';
+import { handleAddQuestion } from '../actions/shared'
+import { withRouter } from 'react-router-dom'
 
 class NewQuestion extends Component {
-    
+
     state = {
         answerOptionOne: '',
         answerOptionTwo: ''
@@ -11,7 +12,13 @@ class NewQuestion extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.addQuestion(this.state.answerOptionOne, this.state.answerOptionTwo)
+        if (this.state.answerOptionOne.trim().length > 0 && this.state.answerOptionTwo.trim().length > 0) {
+            this.props.addQuestion(this.state.answerOptionOne, this.state.answerOptionTwo)
+            let path = `/`
+            this.props.history.push(path)
+        }
+        else
+            (window.alert("enter valid input"))
     }
 
     handleChange = (e) => {
@@ -51,4 +58,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(NewQuestion)
+export default withRouter(connect(null, mapDispatchToProps)(NewQuestion))

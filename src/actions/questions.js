@@ -1,7 +1,4 @@
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
-export const ADD_NEW_QUESTION = 'ADD_NEW_QUESTION'
-export const SELECT_QUESTION = 'SELECT_QUESTION'
+import {RECEIVE_QUESTIONS, SAVE_QUESTION_ANSWER, ADD_NEW_QUESTION, SELECT_QUESTION } from './types'
 
 export function receiveQuestions(questions) {
   return {
