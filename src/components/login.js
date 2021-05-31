@@ -8,12 +8,14 @@ class Login extends Component {
 
     state = {
         authedUser: '',
-        toDashboard: false
+        toDashboard: false,
+        isDisabled: true
     }
 
     handleChange = (e) => {
         this.setState({
-            authedUser: e.target.value
+            authedUser: e.target.value,
+            isDisabled: false
         })
     }
 
@@ -36,13 +38,12 @@ class Login extends Component {
                 <img src={logo} className="App-logo" alt="logo" />
                 <form onSubmit={this.handleSubmit}>
                     <select value={this.state.authedUser} onChange={this.handleChange}>
-                        <option value="" selected disabled hidden>Select user</option>
+                        <option value="" defaultValue disabled hidden>Select user</option>
                         {Object.keys(this.props.users).map((user, i) => (
                             <option key={user} value={user}>@{user}</option>
                         ))}
                     </select>
-
-                    <input type="submit" value="Login" />
+                    <input type="submit" value="Login"  disabled={this.state.isDisabled} />
                 </form>
             </div>
         )

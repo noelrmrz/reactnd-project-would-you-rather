@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAnswer } from '../actions/shared'
 import { formatDate } from '../utils/api'
+import { withRouter } from 'react-router-dom'
+import { selectQuestion } from '../actions/questions'
+import logo from '../logo.svg'
 
 class Question extends Component {
-
-    state = {
-        selectedOption: ''
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectedOption: ''
+        }
+        this.loadQuestionDetails = this.loadQuestionDetails.bind(this)
+    }
 
     radioSelected = (e) => {
         this.setState({
@@ -20,8 +26,13 @@ class Question extends Component {
         this.props.saveQuestionAnswer(this.state.selectedOption)
     }
 
-    render() {
+    loadQuestionDetails(e, questionId, question) {
+        this.props.selectQuestion(question)
+        let path = `/questions/` + questionId
+        this.props.history.push(path)
+    }
 
+    render() {
         const { questionAuthor } = this.props
         const { question } = this.props
         const { author, id, optionOne, optionTwo, timestamp } = question
@@ -32,8 +43,8 @@ class Question extends Component {
         }
 
         return (
-            
-            <div className="question">
+
+            <div className="question" onClick={(e) => this.loadQuestionDetails(e, question.id, question)}>
                 <div className='question-header'>
                     <div className='question-details'>
                         <h3>Asked by @{questionAuthor.id}</h3>
@@ -59,20 +70,34 @@ class Question extends Component {
                         </form>
                     </div>
                     : <div className="question-body">
-                        <h2>Would you rather...</h2>
-                        <p>{optionOne.text}</p>
-                        <meter id={optionOne}
-                            min="0" max={totalVotes}
-                            value={optionOne.votes.length}>
-                        </meter>
-                        <p>{optionOne.votes.length} of {totalVotes} votes</p>
-                        <p>{optionTwo.text}</p>
-                        <meter id={optionTwo}
-                            min="0" max={totalVotes}
-                            value={optionTwo.votes.length}>
-                        </meter>
-                        <p>{optionTwo.votes.length} of {totalVotes} votes</p>
-                    </div>}
+                    <h2>Would you rather...</h2>
+                    <div className='row'>
+                        <div className='question-result-column-image'>
+                            {getUserVote(this.props.authedUser, question) === 1 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                        </div>
+                        <div className='question-result-column-data'>
+                            <p>{optionOne.text}</p>
+                            <meter id={optionOne}
+                                min="0" max={totalVotes}
+                                value={optionOne.votes.length}>
+                            </meter>
+                            <p>{optionOne.votes.length} of {totalVotes} votes</p>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='question-result-column-image'>
+                            {getUserVote(this.props.authedUser, question) === 2 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                        </div>
+                        <div className='question-result-column-data'>
+                            <p>{optionTwo.text}</p>
+                            <meter id={optionTwo}
+                                min="0" max={totalVotes}
+                                value={optionTwo.votes.length}>
+                            </meter>
+                            <p>{optionTwo.votes.length} of {totalVotes} votes</p>
+                        </div>
+                    </div>
+                </div>}
             </div>
         )
     }
@@ -82,12 +107,21 @@ class Question extends Component {
 ** Checks to see if the authedUser has voted for the question
 ** returns true if they are found to have voted
 */
-function checkForUserVote(authedUser, question) {
+export function checkForUserVote(authedUser, question) {
     if (question.optionOne.votes.includes(authedUser) ||
         question.optionTwo.votes.includes(authedUser))
         return true
     else
         return false
+}
+
+function getUserVote(authedUser, question) {
+    if (question.optionOne.votes.includes(authedUser))
+        return 1
+    else if (question.optionTwo.votes.includes(authedUser))
+        return 2
+    else
+        return -1
 }
 
 function mapStateToProps({ authedUser, users, questions }, { id }) {
@@ -107,8 +141,11 @@ function mapDispatchToProps(dispatch, props) {
     return {
         saveQuestionAnswer: (answer) => {
             dispatch(handleAnswer(id, answer))
+        },
+        selectQuestion: (question) => {
+            dispatch(selectQuestion(question))
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Question)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Question))
