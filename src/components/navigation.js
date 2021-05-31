@@ -14,7 +14,7 @@ class Navigation extends Component {
                         <Link to={{ pathname: '/' }}>Home</Link>
                     </li>
                     <li className="item">
-                        <Link to={{ pathname: '/addquestion' }}>New Question</Link>
+                        <Link to={{ pathname: '/add' }}>New Question</Link>
                     </li>
                     <li className="item">
                         <Link to={{ pathname: '/leaderboard' }}>Leaderboard</Link>
