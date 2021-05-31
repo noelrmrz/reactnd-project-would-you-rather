@@ -69,6 +69,10 @@
   margin: 16px;
 }
 
+.filter-column form {
+  display: contents;
+}
+
 .question-column {
   display: flex;
   flex-direction: column;

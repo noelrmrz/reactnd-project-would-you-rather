@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { handleAnswer } from '../actions/shared'
 import { formatDate } from '../utils/api'
 import { withRouter } from 'react-router-dom'
-import { checkForUserVote } from './question'
+import { checkForUserVote, getUserVote } from './question'
 import Notfound from './notfound'
 import logo from '../logo.svg'
 
@@ -35,8 +35,6 @@ class QuestionDetails extends Component {
         const questionAuthor = this.props.users[question.author]
         const { author, id, optionOne, optionTwo, timestamp } = question
         const totalVotes = optionOne.votes.length + optionTwo.votes.length
-
-
 
         return (
             <div>
@@ -98,15 +96,6 @@ class QuestionDetails extends Component {
             </div>
         )
     }
-}
-
-function getUserVote(authedUser, question) {
-    if (question.optionOne.votes.includes(authedUser))
-        return 1
-    else if (question.optionTwo.votes.includes(authedUser))
-        return 2
-    else
-        return -1
 }
 
 function mapStateToProps({ authedUser, users, questions }, props) {

@@ -115,7 +115,10 @@ export function checkForUserVote(authedUser, question) {
         return false
 }
 
-function getUserVote(authedUser, question) {
+/*
+** Determines what options the user selected
+*/
+export function getUserVote(authedUser, question) {
     if (question.optionOne.votes.includes(authedUser))
         return 1
     else if (question.optionTwo.votes.includes(authedUser))
