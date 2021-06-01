@@ -19,10 +19,10 @@ class Leaderboard extends Component {
                     </thead>
                     <tbody>
                         {this.props.userIds.map((id, index) => (
-                            <tr>
+                            <tr key={id}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    <img src={this.props.users[id].avatarURL} className="avatar" />
+                                    <img src={this.props.users[id].avatarURL} className="avatar" alt="user avatar" />
                                     <p>@{id}</p>
                                 </td>
                                 <td>{Object.keys(this.props.users[id].answers).length}</td>

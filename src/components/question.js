@@ -35,7 +35,7 @@ class Question extends Component {
     render() {
         const { questionAuthor } = this.props
         const { question } = this.props
-        const { author, id, optionOne, optionTwo, timestamp } = question
+        const { optionOne, optionTwo, timestamp } = question
         const totalVotes = optionOne.votes.length + optionTwo.votes.length
 
         if (question === null) {
@@ -50,7 +50,7 @@ class Question extends Component {
                         <h3>Asked by @{questionAuthor.id}</h3>
                         <p>{formatDate(timestamp)}</p>
                     </div>
-                    <img src={questionAuthor.avatarURL} className="avatar" />
+                    <img src={questionAuthor.avatarURL} className="avatar" alt="avatar profile"/>
                 </div>
                 { checkForUserVote(this.props.authedUser, question) !== true
                     ? <div className="question-body">
@@ -73,7 +73,7 @@ class Question extends Component {
                         <h2>Would you rather...</h2>
                         <div className='row'>
                             <div className='question-result-column-image'>
-                                {getUserVote(this.props.authedUser, question) === 1 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                                {getUserVote(this.props.authedUser, question) === 1 ? <img src={logo} alt="You voted for this" /> : <img alt='placeholder'></img>}
                             </div>
                             <div className='question-result-column-data'>
                                 <p>{optionOne.text}</p>
@@ -86,7 +86,7 @@ class Question extends Component {
                         </div>
                         <div className='row'>
                             <div className='question-result-column-image'>
-                                {getUserVote(this.props.authedUser, question) === 2 ? <img src={logo} alt="You voted for this" /> : <img></img>}
+                                {getUserVote(this.props.authedUser, question) === 2 ? <img src={logo} alt="You voted for this" /> : <img alt='placeholder'></img>}
                             </div>
                             <div className='question-result-column-data'>
                                 <p>{optionTwo.text}</p>
